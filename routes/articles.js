@@ -4,7 +4,11 @@ const path = require('path');
 const { google } = require('googleapis');
 
 const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, '..', 'sa_key.json'),
+    credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        // Replaces escaped string newlines if formatted incorrectly in deployment UI
+        private_key: process.env.GOOGLE_PRIVATE_KEY ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined
+    },
     scopes: ['https://www.googleapis.com/auth/documents.readonly']
 });
 
