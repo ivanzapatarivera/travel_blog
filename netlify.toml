@@ -1,0 +1,12 @@
+[build]
+    functions = "netlify/functions"
+    publish = "."
+
+[functions]
+    # Add sa_key.json to the list of bundled files
+    included_files = ["assets/**", "routes/**", "sa_key.json"]
+
+[[redirects]]
+    from = "/*"
+    to = "/.netlify/functions/app"
+    status = 200

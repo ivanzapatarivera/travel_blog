@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
+const serverless = require('serverless-http');
 
 const app = express();
 
@@ -14,7 +15,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'assets/html/intro', 'intro.html'));
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+}   );
+
+module.exports.handler = serverless(app);

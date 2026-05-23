@@ -47,6 +47,7 @@ function getContent(paragraph, data) {
                 type: "image",
                 inlineObjectId: objectId,
                 alt: alt,
+                caption: alt,
                 url: url
             }
         }
@@ -55,11 +56,16 @@ function getContent(paragraph, data) {
 }
 
 function renderImage(content) {
+    const figure = document.createElement('figure');
     const img = document.createElement('img');
+    const caption = document.createElement('figcaption');
     img.src = content?.url;
     img.alt = content?.alt;
     img.className = `content-item-${content?.type}`;
-    return img;
+    caption.textContent = content?.caption;
+    figure.appendChild(img);
+    figure.appendChild(caption)
+    return figure;
 }
 
 function renderText(content) {
